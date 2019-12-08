@@ -43,6 +43,7 @@ class IntCodeComputer(object):
         if len(self.inputs) > 0:
             auto_input = self.inputs[0]
             self.inputs = self.inputs[1:]
+            print(f"using input {auto_input}")
             return int(auto_input)
         else:
             print("input:")

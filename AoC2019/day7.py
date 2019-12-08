@@ -4,6 +4,7 @@ from itertools import permutations
 import queue
 import threading
 
+
 def part1():
     computer = IntCodeComputer(day7_parsed)
     phase_sequences = list(permutations(range(0, 5)))
@@ -35,14 +36,12 @@ def part2():
             input_queues.append(queue.Queue())
             print(f"{i}: {input_queues[i]}")
 
-
         for i in range(5):
             comp_thread = threading.Thread(
                 target=computers[i].compute,
                 args=(input_queues[i], input_queues[i + 1 if i <= 3 else 0])
             )
             threads.append(comp_thread)
-
 
         for i in range(4, -1, -1):
             threads[i].start()
@@ -64,6 +63,7 @@ def part2():
         all_outputs.add(final_output)
 
     print(f"overall max: {max(all_outputs)}")
+
 
 if __name__ == "__main__":
     part2()

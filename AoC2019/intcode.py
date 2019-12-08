@@ -167,5 +167,6 @@ def main():
     print(result)
     print("fin.")
 
+
 if __name__ == "__main__":
     main()

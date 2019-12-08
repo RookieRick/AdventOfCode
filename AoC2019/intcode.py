@@ -53,7 +53,7 @@ class IntCodeComputer(object):
         working_copy = list(self.program)
         pos = 0
         while True:
-            instr = self.get_instr(working_copy, pos)
+            instr = IntCodeComputer.get_instr(working_copy, pos)
             opcode = instr[0]
             args = instr[1:]
 
@@ -89,7 +89,8 @@ class IntCodeComputer(object):
             pos = next_pos
         return working_copy
 
-    def get_instr(self, program, instr_index):
+    @staticmethod
+    def get_instr(program, instr_index):
         instr_input = str(program[instr_index])
         opcode = int(instr_input[-2:])
         param_modes = list(instr_input[:-2])

@@ -1,4 +1,5 @@
 import itertools
+import queue
 
 # hacky opcodes constants
 ADD = 1
@@ -10,6 +11,9 @@ JUMP_IF_FALSE = 6
 LESS_THAN = 7
 EQUALS = 8
 BREAK = 99
+
+# even hackier debug const - could use logging with actual levels but... eeeeeeeh. I do need to do other life things
+DEBUG = False
 
 class Operation:
     num_inputs = 0
@@ -34,28 +38,39 @@ OPERATIONS = {
 
 
 class IntCodeComputer(object):
-    def __init__(self, program):
+    def __init__(self, program, id="COMPUTER"):
         self.program = program
         self.inputs = []
         self.outputs = []
+        self.id = id
 
     def get_input(self):
-        if len(self.inputs) > 0:
+        if type(self.inputs) is list and len(self.inputs) > 0:
             auto_input = self.inputs[0]
             self.inputs = self.inputs[1:]
             print(f"using input {auto_input}")
             return int(auto_input)
+        elif type(self.inputs) is queue.Queue:
+            queued_input = None
+            while queued_input is None:
+                queued_input = int(self.inputs.get())  # assumes threaded if using a queue..
+            if DEBUG:
+                print(f"pulled from queue {queued_input}")
+            return int(queued_input)
         else:
             print("input:")
             return int(input())
 
-    def compute(self, inputs=[]):
+    def compute(self, inputs=[], output_queue=None):
         self.inputs = inputs
         working_copy = list(self.program)
         pos = 0
+        print(f"starting compute loop for {self.id} with input {self.inputs} output_queue={output_queue}")
         while True:
             instr = IntCodeComputer.get_instr(working_copy, pos)
             opcode = instr[0]
+            if DEBUG:
+                print(f"{self.id}: {opcode}")
             args = instr[1:]
 
             next_pos = pos + len(instr)
@@ -68,8 +83,12 @@ class IntCodeComputer(object):
             elif opcode == INPUT:
                 working_copy[args[0]] = self.get_input()
             elif opcode == OUTPUT:
-                print(args[0])
+                print(f"{self.id}: {args[0]}")
                 self.outputs.append(args[0])
+                if output_queue is not None:
+                    if DEBUG:
+                        print(f"{self.id} publishing {args[0]} to {output_queue}")
+                    output_queue.put(args[0])
             elif opcode == JUMP_IF_TRUE:
                 if args[0]:
                     next_pos = args[1]
@@ -88,6 +107,7 @@ class IntCodeComputer(object):
                     working_copy[args[2]] = 0
 
             pos = next_pos
+        print(f"{self.id}.compute returning")
         return working_copy
 
     @staticmethod

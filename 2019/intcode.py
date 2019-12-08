@@ -14,9 +14,11 @@ BREAK = 99
 class Operation:
     num_inputs = 0
     param_mode_mask = ()
+
     def __init__(self, num_inputs, mode_mask):
         self.num_inputs = num_inputs
         self.param_mode_mask = mode_mask
+
 
 OPERATIONS = {
     ADD: Operation(3, [None, None, 1]),
@@ -29,6 +31,7 @@ OPERATIONS = {
     EQUALS: Operation(3, [None, None, 1]),
     BREAK: Operation(0, []),
 }
+
 
 def compute(original_input):
     inputs = list(original_input)
@@ -71,6 +74,7 @@ def compute(original_input):
         pos = next_pos
     return inputs
 
+
 def get_instr(inputs, instr_index):
     instr_input = str(inputs[instr_index])
     opcode = int(instr_input[-2:])
@@ -84,17 +88,6 @@ def get_instr(inputs, instr_index):
     param_modes.extend([0] * (num_args - len(param_modes))) # pad if needed
     # apply override mask
     param_modes = [mode if masked is None else masked for (mode, masked) in itertools.zip_longest(param_modes, operation.param_mode_mask)]
-    #
-    # if opcode in (1, 2, 5, 6):
-    #     num_args = 3
-    #     param_modes.extend([0] * (3-len(param_modes)))
-    #     if opcode in (1, 2): # ops that write results
-    #         param_modes[2] = 1 # output is "never immediate mode", but that is backwards for the way I've implemented lol
-    # elif opcode in (3, 4):
-    #     num_args = 1
-    #     if opcode == 3:
-    #         # never-always immediate mode
-    #         param_modes = [1]
 
     for p_offset in range(1, num_args+1):
         immed_mode = int(param_modes[p_offset-1:p_offset][0]) if param_modes[p_offset-1:p_offset] else 0

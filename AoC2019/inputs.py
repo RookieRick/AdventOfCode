@@ -22,10 +22,10 @@ STRING_PER_LINE = 1
 
 
 def get_input(day: int):
-    if day not in (6,):
+    if day not in (6,10):
         raise RuntimeError("You haven't cleaned up input loading for that day yet")
-    raw_formats = {6: STRING_PER_LINE}
-    parsed_formats = {6: FLAT_LIST }
+    raw_formats = {6: STRING_PER_LINE, 10: STRING_PER_LINE}
+    parsed_formats = {6: FLAT_LIST, 10: FLAT_LIST }
     input_filename = f"./raw_inputs/day{day}.txt"
     input_file = open(input_filename, "r")
 

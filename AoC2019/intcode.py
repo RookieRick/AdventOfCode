@@ -46,6 +46,11 @@ OPERATIONS = {
 
 class IntCodeComputer(object):
     def __init__(self, program, id="COMPUTER"):
+        """
+        Initializes an IntCode computer
+        :param program: the program (series of ints) to load
+        :param id: optional computer ID
+        """
         self.program = program
         self.inputs = []
         self.outputs = []
@@ -65,11 +70,21 @@ class IntCodeComputer(object):
             if DEBUG:
                 print(f"pulled from queue {queued_input}")
             return int(queued_input)
+        elif callable(self.inputs):
+            return int(self.inputs())
         else:
             print("input:")
             return int(input())
 
     def compute(self, inputs=[], output_queue=None):
+        """
+        Start the computer, with optional overrides for default i/o
+        :param inputs:  if a list, will consume inputs from list before switching to interactive.
+                        if a queue, will read from queue (or block) when input is needed
+                        if a callable, will invoke to get next input when needed
+        :param output_queue:
+        :return:
+        """
         self.inputs = inputs
         working_copy = list(self.program)
         working_copy.extend([0] * 1000000) # lazy but effective..

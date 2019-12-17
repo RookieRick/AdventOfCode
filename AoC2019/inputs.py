@@ -19,13 +19,14 @@ day8_raw = "10222212222222202220222202022222022222222022222222122221220222022222
 # hacky constants for formats:
 FLAT_LIST = 0
 STRING_PER_LINE = 1
+CSV_INT = 2
 
 
 def get_input(day: int):
-    if day not in (6,10):
+    if day not in (6,9,10):
         raise RuntimeError("You haven't cleaned up input loading for that day yet")
-    raw_formats = {6: STRING_PER_LINE, 10: STRING_PER_LINE}
-    parsed_formats = {6: FLAT_LIST, 10: FLAT_LIST }
+    raw_formats = {6: STRING_PER_LINE, 9: CSV_INT, 10: STRING_PER_LINE}
+    parsed_formats = {6: FLAT_LIST, 9: FLAT_LIST, 10: FLAT_LIST}
     input_filename = f"./raw_inputs/day{day}.txt"
     input_file = open(input_filename, "r")
 
@@ -33,6 +34,9 @@ def get_input(day: int):
     parsed_format = parsed_formats[day]
     if raw_format is STRING_PER_LINE and parsed_format is FLAT_LIST:
         return [line.rstrip() for line in input_file]
+    elif raw_format is CSV_INT and parsed_format is FLAT_LIST:
+        return [int(x) for x in input_file.read().split(',')]
+
 
 
 

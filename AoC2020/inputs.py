@@ -9,11 +9,17 @@ CSV_INT = 2
 FLAT_LIST_INT = 3
 LIST_SPLIT_ON_SPACE_OR_COLON = 4
 
-
-
 def get_input(day: int):
-    raw_formats = {1: STRING_PER_LINE, 2: STRING_PER_LINE}
-    parsed_formats = {1: FLAT_LIST_INT, 2: LIST_SPLIT_ON_SPACE_OR_COLON}
+    raw_formats = {
+        1: STRING_PER_LINE,
+        2: STRING_PER_LINE,
+        3: STRING_PER_LINE
+    }
+    parsed_formats = {
+        1: FLAT_LIST_INT,
+        2: LIST_SPLIT_ON_SPACE_OR_COLON,
+        3: FLAT_LIST
+    }
     input_filename = f"./raw_inputs/day{day}.txt"
     input_file = open(input_filename, "r")
 

@@ -5,9 +5,7 @@ from collections import namedtuple
 ValidationRule = namedtuple("ValidationRule", ["regex", "groups_validator"])
 
 if __name__=="__main__":
-    input = parser.parse("./raw_inputs/day4.txt", blob=True) # transforms=[parser.Map({"#": True, ".": False})])
-
-    records = re.split('\n\n', input)
+    data = parser.parse("./raw_inputs/day4.txt", blob=True, transforms=[parser.Split("\n| "), parser.Split("\n\n")])
 
     valid = 0
     invalid = 0
@@ -28,8 +26,8 @@ if __name__=="__main__":
         'pid': ValidationRule(re.compile('^[0-9]{9}$'), None),
         'cid': None}
 
-    for record in records:
-        fields = {k: v for k, v in [field.split(':') for field in re.split('\n| ', record)]}
+    for record in data:
+        fields = {k: v for k, v in [field.split(':') for field in record]}
         missing = set(all_fields.keys()) - set(fields.keys())
         if (not missing) or missing == {'cid'}:
             any_field_failed = False

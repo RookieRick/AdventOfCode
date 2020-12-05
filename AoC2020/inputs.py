@@ -1,6 +1,7 @@
 # Cribbed from 2019 since it seemed to work well enough there..
 # Might feel cute later and refactor into a single shared cross-year "get_input" thing..  or might not.
 import re
+import warnings
 
 # hacky constants for formats:
 FLAT_LIST = 0
@@ -9,7 +10,9 @@ CSV_INT = 2
 FLAT_LIST_INT = 3
 LIST_SPLIT_ON_SPACE_OR_COLON = 4
 
+
 def get_input(day: int):
+    warnings.warn("THIS IS THE OLD CRUSTY VERSION, USE THE FANCY NEW input_parser.py")
     raw_formats = {
         1: STRING_PER_LINE,
         2: STRING_PER_LINE,

@@ -28,7 +28,11 @@ class Cast(object):
         self.target_type = target_type
 
     def __call__(self, operand):
-        return self.target_type(operand)
+        if type(operand) is str:
+            return self.target_type(operand)
+        else:
+            # assume it's iterable
+            return [self.target_type(val) for val in operand]
 
 
 class Split(object):
@@ -36,7 +40,11 @@ class Split(object):
         self.delimiter = delimiter_regex
 
     def __call__(self, operand):
-        return re.split(self.delimiter, operand)
+        if type(operand) is str:
+            return re.split(self.delimiter, operand)
+        else:
+            # assume it's iterable
+            return [re.split(self.delimiter, val) for val in operand]
 
 
 class Map(object):

@@ -31,7 +31,7 @@ def get_input(day: int):
         elif parsed_format is FLAT_LIST_INT:
             return [int(line.rstrip()) for line in input_file]
         elif parsed_format is LIST_SPLIT_ON_SPACE_OR_COLON:
-            return[re.split(': | ', x.rstrip()) for x in input_file.readlines()]
+            return[re.split(': | ', x.strip()) for x in input_file.readlines()]
     elif raw_format is CSV_INT and parsed_format is FLAT_LIST:
         return [int(x) for x in input_file.read().split(',')]
 

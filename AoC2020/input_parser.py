@@ -23,6 +23,7 @@ def parse(filename, blob=False, transforms=None):
 
 
 class Cast(object):
+    # TODO: extend this to accept a LIST of types if you want to apply it after e.g., Split..
     def __init__(self, target_type):
         # target_type must be callable and accept string (e.g., int, float)
         self.target_type = target_type

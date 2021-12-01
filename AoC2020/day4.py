@@ -1,4 +1,4 @@
-import AdventOfCode.AoC2020.input_parser as parser
+import AdventOfCode.util.input_parser as parser
 import re
 from collections import namedtuple
 

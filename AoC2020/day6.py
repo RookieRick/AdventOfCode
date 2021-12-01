@@ -1,7 +1,4 @@
-import AdventOfCode.AoC2020.input_parser as parser
-import re
-from collections import namedtuple
-
+import AdventOfCode.util.input_parser as parser
 
 if __name__=="__main__":
     data = parser.parse("./raw_inputs/day6.txt", transforms=[parser.Split('\n'), parser.Split('\n\n')], blob=True)

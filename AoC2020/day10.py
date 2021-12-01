@@ -1,5 +1,4 @@
-import AdventOfCode.AoC2020.input_parser as parser
-import re
+import AdventOfCode.util.input_parser as parser
 from collections import defaultdict
 
 DEBUG = False

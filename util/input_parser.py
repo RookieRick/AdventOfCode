@@ -1,3 +1,4 @@
+import itertools
 import re
 
 
@@ -24,16 +25,27 @@ def parse(filename, blob=False, transforms=None):
 
 class Cast(object):
     # TODO: extend this to accept a LIST of types if you want to apply it after e.g., Split..
-    def __init__(self, target_type):
-        # target_type must be callable and accept string (e.g., int, float)
-        self.target_type = target_type
+    def __init__(self, target_types):
+        # target_type must be (optionally, a list of) callable and accept string (e.g., int, float)
+        if type(target_types) != list:  # assume we were handed a bare type for backward compat and dev convenience
+            target_types = [target_types]
+
+        self.target_types = target_types
 
     def __call__(self, operand):
         if type(operand) is str:
-            return self.target_type(operand)
+            return self.target_types[0](operand)
         else:
-            # assume it's iterable
-            return [self.target_type(val) for val in operand]
+            # assume it's iterable..
+            # if we don't have enough target types, reuse the last one as needed
+            # also assume we should always have at least as many values as types
+            if len(operand) < len(self.target_types):
+                raise IndexError("Not enough values for specified types")
+            return [
+                target_type(val) for val, target_type in itertools.zip_longest(
+                    operand, self.target_types, fillvalue=self.target_types[-1]
+                )
+            ]
 
 
 class Split(object):

@@ -37,7 +37,7 @@ class Cast(object):
 
 
 class Split(object):
-    def __init__(self, delimiter_regex):
+    def __init__(self, delimiter_regex="\s"):
         self.delimiter = delimiter_regex
 
     def __call__(self, operand):

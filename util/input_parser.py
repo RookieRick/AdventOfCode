@@ -49,7 +49,7 @@ class Cast(object):
 
 
 class Split(object):
-    def __init__(self, delimiter_regex="\s"):
+    def __init__(self, delimiter_regex="\\s"):
         self.delimiter = delimiter_regex
 
     def __call__(self, operand):
@@ -58,6 +58,19 @@ class Split(object):
         else:
             # assume it's iterable
             return [re.split(self.delimiter, val) for val in operand]
+
+
+class Replace(object):
+    def __init__(self, pattern, replacement, count=-1):
+        self.pattern = pattern
+        self.replacement = replacement
+        self.count = count
+
+    def __call__(self, operand):
+        if type(operand) is str:
+            return operand.replace(self.pattern, self.replacement, self.count)
+        else:  # assumer iterable of strings
+            return [val.replace(self.pattern, self.replacement, self.count) for val in operand]
 
 
 class Map(object):

@@ -1,4 +1,5 @@
 import itertools
+import json
 import re
 
 
@@ -81,5 +82,12 @@ class Map(object):
         # operand should be a string with only characters in the map..
         return [self.map[char] for char in operand]
 
+
+class JsonLoad(object):
+    def __call__(self, operand):
+        if type(operand) is str:
+            return json.loads(operand)
+        else:  # assume iterable of strings
+            return [json.loads(val) for val in operand]
 
 

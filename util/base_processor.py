@@ -11,7 +11,7 @@ class DailyProcessorBase:
 
     def print_debug(self, message):
         if self.debug:
-            print(message)
+            print(message() if callable(message) else message)
 
     def _get_input(self):
         filename = f"./raw_inputs/day{self.day}{'_debug' if self.debug else ''}.txt"

@@ -1,4 +1,4 @@
-from AdventOfCode.AoC2019.inputs import get_input
+from AoC2019.inputs import get_input
 from collections import defaultdict
 
 input_data = get_input(6)

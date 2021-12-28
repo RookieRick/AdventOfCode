@@ -1,4 +1,4 @@
-from AdventOfCode.util import input_parser
+from util import input_parser
 
 
 class DailyProcessorBase:

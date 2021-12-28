@@ -1,4 +1,4 @@
-from AdventOfCode.AoC2019.inputs import day8_raw
+from AoC2019.inputs import day8_raw
 
 image_size = len(day8_raw)
 width = 25

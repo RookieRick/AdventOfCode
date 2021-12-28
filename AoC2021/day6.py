@@ -1,5 +1,5 @@
-from AdventOfCode.util import input_parser
-from AdventOfCode.util.base_processor import DailyProcessorBase
+from util import input_parser
+from util.base_processor import DailyProcessorBase
 
 
 class Day6Processor(DailyProcessorBase):

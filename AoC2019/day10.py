@@ -1,4 +1,4 @@
-from AdventOfCode.AoC2019.inputs import get_input
+from AoC2019.inputs import get_input
 import math
 import bisect
 from collections import OrderedDict

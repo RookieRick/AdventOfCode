@@ -1,4 +1,4 @@
-from AdventOfCode.AoC2019.inputs import day3_parsed
+from AoC2019.inputs import day3_parsed
 
 
 class Point2D(object):

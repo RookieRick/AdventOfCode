@@ -1,5 +1,5 @@
-from AdventOfCode.AoC2019.inputs import get_input
-from AdventOfCode.AoC2019.intcode import IntCodeComputer
+from AoC2019.inputs import get_input
+from AoC2019.intcode import IntCodeComputer
 from collections import defaultdict
 import queue
 import math

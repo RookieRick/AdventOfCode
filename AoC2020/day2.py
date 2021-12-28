@@ -1,4 +1,4 @@
-from AdventOfCode.AoC2020.inputs import get_input
+from AoC2020.inputs import get_input
 
 
 if __name__ == "__main__":

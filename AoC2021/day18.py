@@ -3,8 +3,8 @@ import typing
 
 from enum import IntEnum
 from math import floor, ceil
-from AdventOfCode.util.base_processor import DailyProcessorBase
-from AdventOfCode.util import input_parser
+from util.base_processor import DailyProcessorBase
+from util import input_parser
 
 SPLIT_DEPTH = 4
 

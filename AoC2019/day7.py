@@ -1,5 +1,5 @@
-from AdventOfCode.AoC2019.intcode import IntCodeComputer
-from AdventOfCode.AoC2019.inputs import day7_parsed
+from AoC2019.intcode import IntCodeComputer
+from AoC2019.inputs import day7_parsed
 from itertools import permutations
 import queue
 import threading

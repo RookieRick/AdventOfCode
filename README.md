@@ -1,2 +1,2 @@
 # AdventOfCode
-Solutions for AoC 
+Solutions for AoC https://adventofcode.com/

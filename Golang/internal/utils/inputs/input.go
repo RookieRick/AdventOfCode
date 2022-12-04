@@ -12,6 +12,9 @@ import (
 	"strings"
 )
 
+// GetInput will.. well.. get the input.
+// Massive caveat: It assumes executable is in e.g.  cmd/2022/day/1 which just so happens
+// to be the case when running in VSCode debugger which is the only place I run these. YMMV
 func GetInput() ([]string, error) {
 
 	var (

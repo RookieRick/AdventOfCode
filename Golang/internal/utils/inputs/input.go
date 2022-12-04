@@ -47,7 +47,7 @@ func GetInput() ([]string, error) {
 			Scheme: "https",
 			Host:   "adventofcode.com",
 			Path:   year + "/day/" + day + "/input",
-		} //"https://adventofcode.com/" + year + "/day/" + day + "/input"
+		}
 		http.DefaultClient.Jar, _ = cookiejar.New(nil)
 		http.DefaultClient.Jar.SetCookies(inputUrl, []*http.Cookie{{
 			Name:  "session",

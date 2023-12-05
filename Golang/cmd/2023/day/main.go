@@ -14,7 +14,7 @@ func main() {
 	fmt.Println(len(input))
 
 	for _, line := range input {
-
+		fmt.Println(line)
 	}
 
 	fmt.Println("fin.")

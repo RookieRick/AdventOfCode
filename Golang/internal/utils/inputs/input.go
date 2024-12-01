@@ -58,6 +58,11 @@ func GetInput() ([]string, error) {
 			return nil, err
 		} else {
 			defer resp.Body.Close()
+			if resp.StatusCode == 404 {
+				_ = fp.Close()
+				os.Remove(cacheFile)
+				return nil, errors.New("failed to retrieve input with 404 -- too early?")
+			}
 			if _, copyErr := io.Copy(fp, resp.Body); copyErr != nil {
 				return nil, copyErr
 			}

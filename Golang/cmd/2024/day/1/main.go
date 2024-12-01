@@ -49,7 +49,7 @@ func main() {
 			}
 		}
 
-		fmt.Printf("Part %v: \n", sum)
+		fmt.Printf("Part %v: %v \n", part, sum)
 	}
 
 	fmt.Println("fin.")

@@ -17,9 +17,6 @@ func main() {
 
 	mulRegex := regexp2.MustCompile(`mul\((?'x'\d+),(?'y'\d+)\)`, regexp2.None)
 	//part2Regex := regexp2.MustCompile(`do\(\).*?(?!don\'t\(\)).*?mul\((?'x'\d+),(?'y'\d+)\)`, regexp2.None)
-	if err != nil {
-		panic(err)
-	}
 
 	// regexes := make([]*regexp2.Regexp, 0)
 	// regexes = append(regexes, part1Regex)

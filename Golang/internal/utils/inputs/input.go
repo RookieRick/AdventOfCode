@@ -15,7 +15,7 @@ import (
 // GetInput will.. well.. get the input.
 // Massive caveat: It assumes executable is in e.g.  cmd/2022/day/1 which just so happens
 // to be the case when running in VSCode debugger which is the only place I run these. YMMV
-func GetInput() ([]string, error) {
+func GetInput(prefix ...string) ([]string, error) {
 
 	var (
 		err        error
@@ -36,7 +36,10 @@ func GetInput() ([]string, error) {
 	day := sliced[len(sliced)-1]
 
 	os.MkdirAll(cacheDir, 0700) // will create dir if doesn't exist, else NOOP
-	cacheFile := filepath.Join(cacheDir, "raw_input.txt")
+
+	fileNameParts := append(prefix, "raw_input.txt")
+
+	cacheFile := filepath.Join(cacheDir, strings.Join(fileNameParts, "_"))
 	fp, err = os.OpenFile(cacheFile, os.O_RDWR, 0600)
 	if errors.Is(err, os.ErrNotExist) {
 		// file not found - create it, retrieve input from web and reset our fp to prep for read
